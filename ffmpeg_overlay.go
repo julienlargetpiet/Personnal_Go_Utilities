@@ -10,6 +10,8 @@ var first_file_audio bool = true
 var audio_codec string = "aac"
 var video_codec string = "mp4"
 var command_val string
+var width string = "884"
+var height string = "480"
 
 func main() {
   args_v := os.Args
@@ -71,7 +73,7 @@ func main() {
   cmd := exec.Command("sh", "-c", command_val)
   cmd.Start()
   cmd.Wait()
-  command_val = `ffmpeg -i ` + base_file + ` -i ` + ovrl_file + ` -filter_complex "[1:v]scale=690:430[ovrl];[0:v][ovrl]overlay=x=(main_w-overlay_w):y=570[outv]" -map "[outv]" -shortest raw_overlayed.` + video_codec
+  command_val = `ffmpeg -i ` + base_file + ` -i ` + ovrl_file + ` -filter_complex "[1:v]scale=` + width + `:` + height + `[ovrl];[0:v][ovrl]overlay=x=(main_w-overlay_w):y=570[outv]" -map "[outv]" -shortest raw_overlayed.` + video_codec
   fmt.Println("Overlaying...")
   cmd = exec.Command("sh", "-c", command_val)
   cmd.Start()
