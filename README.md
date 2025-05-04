@@ -11,3 +11,6 @@ $ go build ffmpeg_overlay.go
 $ ./ffmpeg_overlay background_video overlay_video //outputs out.chosen_video_codec
 ```
 
+## Versions
+
+Built with `go1.24.2` and `ffmpeg/ffprobe7.1.1`
