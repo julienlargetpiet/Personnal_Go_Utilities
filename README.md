@@ -2,6 +2,8 @@
 
 Allow to automate the process of overlaying videos. (overlay video at bottom right corner of the background video)
 
+The duration of the output video is the duraction of the background video.
+
 ## Usage
 
 ```
