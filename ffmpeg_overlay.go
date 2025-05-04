@@ -10,7 +10,7 @@ var first_file_audio bool = true
 var audio_codec string = "aac"
 var video_codec string = "mp4"
 var command_val string
-var width string = "884"
+var width string = "854"
 var height string = "480"
 
 func main() {
@@ -39,10 +39,10 @@ func main() {
     fmt.Println(err)
     return
   }
-  _, err = os.Stat("raw_overlay." + video_codec)
+  _, err = os.Stat("raw_overlayed." + video_codec)
   if err == nil {
-    fmt.Println("Removing raw_overlay." + video_codec + "...")
-    err = os.Remove("raw_overlay." + video_codec)
+    fmt.Println("Removing raw_overlayed." + video_codec + "...")
+    err = os.Remove("raw_overlayed." + video_codec)
     if err != nil {
       fmt.Println(err)
       return
@@ -63,6 +63,24 @@ func main() {
     fmt.Println(err)
     return
   }
+
+  var duration_vid string
+  command_val = `ffprobe -i ` + base_file + ` -show_entries format=duration -v quiet -of csv="p=0"`
+  out, err := exec.Command("sh", "-c", command_val).Output()
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  duration_vid = string(out)
+  fmt.Println("Duration of background video in seconds: ", duration_vid, " seconds")
+  command_val = `ffprobe -i ` + ovrl_file + ` -show_entries format=duration -v quiet -of csv="p=0"`
+  out, err = exec.Command("sh", "-c", command_val).Output()
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  duration_vid = string(out)
+  fmt.Println("Duration of overlay video in seconds: ", duration_vid)
 
   if first_file_audio {
     command_val = "ffmpeg -i " + base_file + " -vn -acodec copy audio." + audio_codec
