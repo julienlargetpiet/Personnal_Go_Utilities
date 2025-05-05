@@ -29,6 +29,6 @@ Built with `go1.24.2` and `ffmpeg/ffprobe7.1.1`
 
 # Web utils
 
-This directory provides an example of an `POST` request to upload file to a webserver and an example of a `GET` request.
+This directory provides an example of an `POST` request to upload file to a webserver and an example of a `GET` request to download file from a webserver.
 
 
