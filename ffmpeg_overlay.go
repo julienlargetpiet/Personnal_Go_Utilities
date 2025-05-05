@@ -89,7 +89,6 @@ func main() {
 
   fmt.Println("Cutting overlay file...")
   command_val = "ffmpeg -i " + ovrl_file + " -c copy -ss 0 -t " + duration_vid + " overlay_file." + video_codec
-  fmt.Println(command_val)
   cmd := exec.Command("sh", "-c", command_val)
   cmd.Start()
   cmd.Wait()
@@ -122,6 +121,24 @@ func main() {
   cmd = exec.Command("sh", "-c", command_val)
   cmd.Start()
   cmd.Wait()
+  err = os.Remove("overlay_file." + video_codec)
+  fmt.Println("Removing overlay_file." + video_codec + "...")
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  err = os.Remove("raw_overlayed." + video_codec)
+  fmt.Println("Removing raw_overlayed." + video_codec + "...")
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  err = os.Remove("audio." + audio_codec)
+  fmt.Println("Removing audio." + audio_codec + "...")
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
   return
 }
 
