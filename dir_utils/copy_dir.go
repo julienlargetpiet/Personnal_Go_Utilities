@@ -17,9 +17,7 @@ func CopyDir(src *string, dst *string) error {
   for n > -1 {
     cur_path = vec_dirname[n]
     entries, err := os.ReadDir(cur_path)
-    fmt.Println("loop", cur_path)
     for _, v := range entries {
-      fmt.Println("loop2", v.Name())
       if v.IsDir() {
         cur_path_dir_found = cur_path + "/" + v.Name()
         vec_dirname = slices.Insert(vec_dirname, 0, cur_path_dir_found)
@@ -34,7 +32,6 @@ func CopyDir(src *string, dst *string) error {
         if err != nil {
           return err
         }
-        fmt.Println("okok")
         cur_path2 = *dst + cur_path[ovr:]
         err = os.WriteFile(cur_path2 + "/" + v.Name(), data, 0644)
         if err != nil {
