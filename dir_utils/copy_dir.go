@@ -51,7 +51,7 @@ func CopyDir(src *string, dst *string) error {
 func main() {
   src := "src_copy"
   dst := "dst_copy"
-  err := Tree(&src, &dst)
+  err := CopyDir(&src, &dst)
   if err != nil {
     fmt.Println(err)
     return
