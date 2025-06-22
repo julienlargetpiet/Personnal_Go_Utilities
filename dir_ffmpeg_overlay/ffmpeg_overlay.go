@@ -56,6 +56,9 @@ func main() {
   i := n - 1
   for ovrl_file[i] != '/' {
     i--
+    if i == 0 {
+      break
+    }
   }
   i++
   ovrl_racine = ovrl_file[0:i]
@@ -85,6 +88,9 @@ func main() {
   i = n - 1
   for base_file[i] != '/' {
     i--
+    if i == 0 {
+      break
+    }
   }
   i++
   base_racine = base_file[0:i]
